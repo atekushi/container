@@ -4,12 +4,56 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ca8c1353d824bee0a352b4bc6be2fd95",
-    "packages": [],
+    "content-hash": "dc0fc27baa58b07c75809bd67adb9ccd",
+    "packages": [
+        {
+            "name": "atekushi/support",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/atekushi/support.git",
+                "reference": "29129cf822c635b84babbe37bc7e0be8ebb8b34b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/atekushi/support/zipball/29129cf822c635b84babbe37bc7e0be8ebb8b34b",
+                "reference": "29129cf822c635b84babbe37bc7e0be8ebb8b34b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.2"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Atekushi\\Support\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Endrika Nanami",
+                    "email": "endrika.nanami@gmail.com"
+                }
+            ],
+            "description": "PHP Package to Support All Atekushi Library",
+            "support": {
+                "issues": "https://github.com/atekushi/support/issues",
+                "source": "https://github.com/atekushi/support/tree/main"
+            },
+            "time": "2025-01-09T09:31:58+00:00"
+        }
+    ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {},
+    "stability-flags": {
+        "atekushi/support": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
