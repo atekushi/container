@@ -2,9 +2,19 @@
 
 namespace Atekushi\Container;
 
+use Atekushi\Container\Exceptions\ContainerException;
+use Atekushi\Container\Exceptions\NotFoundException;
+use Atekushi\Support\Singleton;
+use Closure;
 use Psr\Container\ContainerInterface;
+use ReflectionClass;
+use ReflectionException;
+use ReflectionNamedType;
+use ReflectionParameter;
+use ReflectionUnionType;
+use Throwable;
 
-class Container implements ContainerInterface
+class Container extends Singleton implements ContainerInterface
 {
     /**
      * An array to store service bindings.
@@ -22,6 +32,10 @@ class Container implements ContainerInterface
      * @param string $id The identifier of the service.
      *
      * @return object The resolved service.
+     *
+     * @throws ContainerException
+     * @throws NotFoundException
+     * @throws ReflectionException
      */
     public function get(string $id): object
     {
@@ -68,10 +82,37 @@ class Container implements ContainerInterface
      * @param string $id The identifier of the service.
      *
      * @return object The resolved service.
+     * @throws NotFoundException
+     * @throws ContainerException
+     * @throws ReflectionException
      */
     public function resolve(string $id): object
     {
-        // Todo: Add service resolving implementation
+        try {
+            $reflector = new ReflectionClass($id);
+        } catch (Throwable $e) {
+            throw new NotFoundException($e->getMessage(), $e->getCode(), $e);
+        }
+
+        if (!$reflector->isInstantiable()) {
+            throw new ContainerException('Class "' . $id . '" is not instantiable');
+        }
+
+        $constructor = $reflector->getConstructor();
+
+        if (!$constructor) {
+            return $this->set($id, $this->createResolverClosure($id))->get($id);
+        }
+
+        $parameters = $constructor->getParameters();
+
+        if (!$parameters) {
+            return $this->set($id, $this->createResolverClosure($id))->get($id);
+        }
+
+        $dependencies = $this->resolveDependencies($id, $parameters);
+
+        return $this->set($id, $this->createResolverClosure($id, $dependencies))->get($id);
     }
 
     /**
@@ -79,10 +120,67 @@ class Container implements ContainerInterface
      *
      * @param string $id The identifier for the service.
      * @param callable|string $implementation The service or class (can be callable or class name).
-     * @return void
+     * @return self
      */
-    public function set(string $id, callable|string $implementation): void
+    public function set(string $id, callable|string $implementation): self
     {
         $this->bindings[$id] = $implementation;
+
+        return $this;
+    }
+
+    /**
+     * Creates a resolver closure for instantiating a class with its dependencies.
+     *
+     * @param string $class_name The fully-qualified class name to resolve.
+     * @param array $dependencies An array of dependencies to be passed to the class constructor.
+     *
+     * @return Closure A closure that resolves the class instance with the provided dependencies.
+     */
+    protected function createResolverClosure(string $class_name, array $dependencies = []): Closure
+    {
+        if (Singleton::isSingleton($class_name)) {
+            return fn() => call_user_func([$class_name, 'getInstance'], $dependencies);
+        } else {
+            return function () use ($class_name, $dependencies) {
+                $reflection = new ReflectionClass($class_name);
+                return $reflection->newInstanceArgs($dependencies);
+            };
+        }
+    }
+
+    /**
+     * Resolve class dependency
+     *
+     * @param string $id
+     * @param array $parameters
+     * @return array
+     * @throws ContainerException
+     * @throws NotFoundException
+     * @throws ReflectionException
+     */
+    public function resolveDependencies(string $id, array $parameters): array
+    {
+        return array_map(
+            function (ReflectionParameter $param) use ($id) {
+                $name = $param->getName();
+                $type = $param->getType();
+
+                if (!$type) {
+                    throw new ContainerException("Can't resolve parameter '$name' on class '$id' because it don't have any types ",);
+                }
+
+                if ($type instanceof ReflectionUnionType) {
+                    throw new ContainerException("Can't resolve parameter '$name' on class '$id' because parameter have multiple types ",);
+                }
+
+                if ($type instanceof ReflectionNamedType && !$type->isBuiltin()) {
+                    return $this->get($type->getName());
+                }
+
+                throw new ContainerException("Failed to resolve class '$id' because invalid param '$name'");
+            },
+            $parameters
+        );
     }
 }
