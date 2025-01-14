@@ -1,0 +1,19 @@
+{
+    "name": "atekushi/container",
+    "description": "PHP Container",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Atekushi\\Container\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Endrika Nanami",
+            "email": "endrika.nanami@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
