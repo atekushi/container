@@ -14,10 +14,10 @@
             "email": "endrika.nanami@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
         "php": "^8.2",
-        "atekushi/support": "dev-main",
-        "psr/container": "^2.0@dev"
+        "psr/container": "^2.0",
+        "atekushi/singleton": "^1.0"
     }
 }

@@ -4,30 +4,29 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "665169c835af44413843fd02967fde3f",
+    "content-hash": "4c61089693be708c7f678f23519f62c1",
     "packages": [
         {
-            "name": "atekushi/support",
-            "version": "dev-main",
+            "name": "atekushi/singleton",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/atekushi/support.git",
-                "reference": "29129cf822c635b84babbe37bc7e0be8ebb8b34b"
+                "url": "https://github.com/atekushi/singleton.git",
+                "reference": "8ca7b33e63d361dee8e52db23a64bca25e879fc6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/atekushi/support/zipball/29129cf822c635b84babbe37bc7e0be8ebb8b34b",
-                "reference": "29129cf822c635b84babbe37bc7e0be8ebb8b34b",
+                "url": "https://api.github.com/repos/atekushi/singleton/zipball/8ca7b33e63d361dee8e52db23a64bca25e879fc6",
+                "reference": "8ca7b33e63d361dee8e52db23a64bca25e879fc6",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.2"
+                "php": "^8.0"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Atekushi\\Support\\": "src/"
+                    "Atekushi\\Singleton\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -40,31 +39,30 @@
                     "email": "endrika.nanami@gmail.com"
                 }
             ],
-            "description": "PHP Package to Support All Atekushi Library",
+            "description": "Small Library to Implement Singleton Pattern To Your Project",
             "support": {
-                "issues": "https://github.com/atekushi/support/issues",
-                "source": "https://github.com/atekushi/support/tree/main"
+                "issues": "https://github.com/atekushi/singleton/issues",
+                "source": "https://github.com/atekushi/singleton/tree/1.0.0"
             },
-            "time": "2025-01-09T09:31:58+00:00"
+            "time": "2025-01-14T09:33:31+00:00"
         },
         {
             "name": "psr/container",
-            "version": "dev-master",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/container.git",
-                "reference": "707984727bd5b2b670e59559d3ed2500240cf875"
+                "reference": "c71ecc56dfe541dbd90c5360474fbc405f8d5963"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/container/zipball/707984727bd5b2b670e59559d3ed2500240cf875",
-                "reference": "707984727bd5b2b670e59559d3ed2500240cf875",
+                "url": "https://api.github.com/repos/php-fig/container/zipball/c71ecc56dfe541dbd90c5360474fbc405f8d5963",
+                "reference": "c71ecc56dfe541dbd90c5360474fbc405f8d5963",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.4.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -97,18 +95,15 @@
             ],
             "support": {
                 "issues": "https://github.com/php-fig/container/issues",
-                "source": "https://github.com/php-fig/container"
+                "source": "https://github.com/php-fig/container/tree/2.0.2"
             },
-            "time": "2023-09-22T11:11:30+00:00"
+            "time": "2021-11-05T16:47:00+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "dev",
-    "stability-flags": {
-        "atekushi/support": 20,
-        "psr/container": 20
-    },
+    "minimum-stability": "stable",
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

@@ -4,7 +4,7 @@ namespace Atekushi\Container;
 
 use Atekushi\Container\Exceptions\ContainerException;
 use Atekushi\Container\Exceptions\NotFoundException;
-use Atekushi\Support\Singleton;
+use Atekushi\Singleton\Singleton;
 use Closure;
 use Psr\Container\ContainerInterface;
 use ReflectionClass;
