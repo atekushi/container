@@ -17,6 +17,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": "^8.2",
-        "atekushi/support": "dev-main"
+        "atekushi/support": "dev-main",
+        "psr/container": "^2.0@dev"
     }
 }
